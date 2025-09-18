@@ -1,6 +1,9 @@
 import { X, Upload, Link, Camera, File, } from "lucide-react";
 import { useState } from "react";
 import { Create } from "../../services/CreateFunc";
+import { useAIcontent } from "../../context/AISummaryContext";
+import { useNavigate } from "react-router-dom";
+import { Loading } from "../LoadingUI/Loading";
 function CreateModal({setShowCreateModal, show}){
   const createMethods = [
         {
@@ -28,20 +31,43 @@ function CreateModal({setShowCreateModal, show}){
           color: 'from-teal-500 to-blue-600'
         }
   ];
+  const navigate = useNavigate();
   const [newSet, setNewSet] = useState({title: ''});
   const [createMethod, setCreateMethod] = useState(createMethods[0]);
-  const handleCreateSet = () => {
-  // Logic to create new study set
-    createMethod.id === 'URL' ? Create("url", '') : Create(createMethod.id === 'Document' ? document : image, newSet.title );
-    setShowCreateModal(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const {setAIsummaryContent} = useAIcontent();
+  const handleCreateSet = async () => {
+    try{
+      setIsLoading(true);
+      let result;
+      setShowCreateModal(false);
+      if (createMethod.id === "URL") {
+        result = await Create("url", "");
+      } else if (createMethod.id === "Document") {
+        result = await Create(document, newSet.title);
+      } else {
+        result = await Create(image, newSet.title);
+      }
+      (result) ? setAIsummaryContent(result) : alert('Error');
+    }
+    catch(err){
+      setError(err.message);
+    }
+    finally{
+      setIsLoading(false);
+      navigate("/sets/study/1");
+    }
   };
+
   //Upload Image or Document
   const [image, setImage] = useState(null);
   const [document, setDocument] = useState(null);
   return (
-      <div
+    <>
+    <div
         className={`fixed inset-0 z-50 p-4 items-center justify-center ${
-          show ? "flex" : "hidden"
+          show  ? "flex" : "hidden"
         }`}
       >
         {/* Backdrop */}
@@ -186,6 +212,8 @@ function CreateModal({setShowCreateModal, show}){
 
         </div>
       </div>
+      {isLoading && <Loading LoadingText={"AI is generating Study Set"} />}
+    </>
   )
 }
 export default CreateModal;

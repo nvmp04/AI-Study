@@ -8,59 +8,6 @@ import TabNav from './LeftColumn/TabNav';
 import PDFcontent from './LeftColumn/StudyContent/PDFcontent';
 import StudyTools from './RightColumn/StudyTools';
 
-export const contentContext = createContext();
-function ContentProvider({children}){
-  const aiSummaryContent = {
-    introduction: `Khóa học này cung cấp kiến thức và các bước cơ bản về đánh giá hiệu suất hệ thống máy tính, bao gồm các chỉ số hiệu suất, phân tích định lượng, thiết kế thực nghiệm và mô phỏng. Mục tiêu là trang bị cho sinh viên khả năng xác định yêu cầu hiệu suất, đặc tả tải hệ thống, xác định nút thắt cổ chai, lên kế hoạch công suất và đánh giá các phương án thiết kế.`,
-
-    coreKnowledge: [
-      {
-        title: "Monitoring examples",
-        content: "Các ví dụ về giám sát hệ thống và thu thập dữ liệu hiệu suất"
-      },
-      {
-        title: "Basic concepts",
-        content: "Hiểu về khái niệm Performance và cách đo lường hiệu suất hệ thống"
-      },
-      {
-        title: "Course overview", 
-        content: "Tổng quan về môn học và các chủ đề chính sẽ được học"
-      },
-      {
-        title: "Case study",
-        content: "Supply chain by queuing network, Shortest path algorithms, 'Just in time' và performance evaluation"
-      },
-      {
-        title: "Hiệu suất của một hệ thống",
-        content: "Liên quan đến các yếu tố như thời gian phản hồi trung bình, thông lượng và cách chúng bị ảnh hưởng bởi các thay đổi trong hệ thống."
-      },
-      {
-        title: "Độ trễ (thời gian)",
-        content: "Thời gian cần thiết để hoàn thành một công việc."
-      },
-      {
-        title: "Thông lượng (tốc độ)",
-        content: "Số lượng công việc hoàn thành trong một đơn vị thời gian."
-      }
-    ],
-
-    notes: [
-      "Đặt ra các câu hỏi về thời gian hoàn thành công việc, thông lượng, và tác động của việc tăng tải hoặc thay đổi cấu hình hệ thống."
-    ],
-
-    applications: [
-      "Xác định yêu cầu hiệu suất trong thiết kế hệ thống.",
-      "Đặc tả tải hệ thống thực tế.",
-      "Phát hiện và xử lý nút thắt cổ chai.",
-      "Lập kế hoạch công suất và đánh giá phương án thiết kế."
-    ]
-  };
-  return(
-    <contentContext.Provider value={{aiSummaryContent}}>
-      {children}
-    </contentContext.Provider>
-  )
-}
 export default function AIStudyInterface() {
   const [activeTab, setActiveTab] = useState('ai-summary');
   
@@ -91,7 +38,6 @@ export default function AIStudyInterface() {
             <div className="min-h-[600px]">
               {activeTab === 'ai-summary' ? (
                 <div className="space-y-8">
-                  <ContentProvider>
                     {/* Document Overview */}
                     <Introduction/>
 
@@ -103,7 +49,6 @@ export default function AIStudyInterface() {
 
                     {/*Application*/}
                     <Applications/>
-                  </ContentProvider>
                 </div>
               ) : (
                 /* Original PDF Content */

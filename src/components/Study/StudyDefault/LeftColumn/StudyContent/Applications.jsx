@@ -1,8 +1,7 @@
 import { Lightbulb } from "lucide-react";
-import { useContext } from "react";
-import { contentContext } from "../../Study";
+import { useAIcontent } from "../../../../../context/AISummaryContext";
 function Applications(){
-    const {aiSummaryContent} = useContext(contentContext)
+    const {aiSummaryContent} = useAIcontent();
     return (
         <div className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-2xl p-8 backdrop-blur-xl">
             <div className="flex items-center space-x-3 mb-6">

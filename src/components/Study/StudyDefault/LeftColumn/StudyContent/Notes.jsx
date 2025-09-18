@@ -1,8 +1,7 @@
 import { InfoIcon } from "lucide-react";
-import { useContext } from "react";
-import { contentContext } from "../../Study";
+import { useAIcontent } from "../../../../../context/AISummaryContext";
 function Notes(){
-    const {aiSummaryContent} = useContext(contentContext)
+    const {aiSummaryContent} = useAIcontent();
     return (
         <div className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-2xl p-8 backdrop-blur-xl">
             <div className="flex items-center space-x-3 mb-6">
@@ -11,9 +10,15 @@ function Notes(){
                 </div>
                 <h2 className="text-2xl font-bold text-white">Lưu ý</h2>
             </div>
-            <p className="text-white leading-relaxed text-lg">
-                {aiSummaryContent.notes}
-            </p>
+            <div className="space-y-6">
+                {aiSummaryContent.notes.map((component, index) => (
+                    <div>
+                        <p className="text-white leading-relaxed text-lg">
+                        {component} 
+                        </p>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

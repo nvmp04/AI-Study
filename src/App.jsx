@@ -8,6 +8,8 @@ import AIStudyInterface from './components/Study/StudyDefault/Study'
 import Flashcards from './components/Study/FlashCarts'
 import { useState } from 'react'
 import Quiz from './components/Study/Quiz'
+import { useAuth } from './hooks/AuthContext'
+import LogInPage from './components/LoginPage/Login'
 export function Background(){
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/10 to-cyan-900/20">
@@ -19,12 +21,15 @@ export function Background(){
 }
 function AppRoutes() {
   const [showCreateModal, setShowCreateModal] = useState();
+  const {isLoggedIn} = useAuth();
   return (
     <>
         <Routes> 
-          <Route path="/" element={<HomePage 
-            showCreateModal={showCreateModal}
-            setShowCreateModal={setShowCreateModal}/>} /> 
+          <Route path="/" element={isLoggedIn ? 
+            <HomePage 
+              showCreateModal={showCreateModal}
+              setShowCreateModal={setShowCreateModal}/> :
+            <LogInPage/>} /> 
           <Route path="/sets" element={<StudySetsPage 
             showCreateModal={showCreateModal}
             setShowCreateModal={setShowCreateModal}/>} /> 
