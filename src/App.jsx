@@ -8,8 +8,8 @@ import AIStudyInterface from './components/Study/StudyDefault/Study'
 import Flashcards from './components/Study/FlashCarts'
 import { useState } from 'react'
 import Quiz from './components/Study/Quiz'
-import { useAuth } from './hooks/AuthContext'
-import LogInPage from './components/LoginPage/Login'
+import { useAuth } from './hooks/useAuth'
+import LogInPage from './components/LoginPage/LogIn'
 export function Background(){
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/10 to-cyan-900/20">

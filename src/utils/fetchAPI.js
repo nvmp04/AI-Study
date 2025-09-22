@@ -5,7 +5,8 @@ export async function fetchAPI(url, method = "GET", content = null) {
       if (content instanceof FormData) {
         options.body = content;
       } else {
-        options.headers = { "Content-Type": "application/json" };
+        options.headers = { 
+          "Content-Type": "application/json"};
         options.body = JSON.stringify(content); 
       }
     }

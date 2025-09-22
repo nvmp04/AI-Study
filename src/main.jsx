@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import { SetsProvider } from './context/SetsContext.jsx'
 import { AISummaryProvider } from './context/AISummaryContext.jsx'
-import { AuthProvider } from './hooks/AuthContext.jsx'
+import { AuthProvider } from './hooks/useAuth.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

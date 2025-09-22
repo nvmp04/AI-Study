@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Brain, Eye, EyeOff, Mail, Lock, Sparkles, ArrowRight } from 'lucide-react';
 import {check} from '../../utils/checkEmailPass'
-import { useAuth } from '../../hooks/AuthContext'; 
+import { useAuth } from '../../hooks/useAuth'; 
 import { sendInformation } from '../../services/LogSign';
 import { emailRef, passwordRef } from '../../utils/checkEmailPass';
 import Popup from "./PopupComp";
-
 
 export default function LogInPage() {
   const [showPassword, setShowPassword] = useState(false);
