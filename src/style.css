@@ -1,4 +1,8 @@
+@import "tailwindcss";
 /* Thanh cuộn tổng thể */
+button{
+  cursor: pointer;
+}
 ::-webkit-scrollbar {
   width: 8px;
 }

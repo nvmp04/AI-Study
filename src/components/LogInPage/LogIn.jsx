@@ -5,8 +5,10 @@ import { useAuth } from '../../hooks/useAuth';
 import { sendInformation } from '../../services/LogSign';
 import { emailRef, passwordRef } from '../../utils/checkEmailPass';
 import Popup from "./PopupComp";
+import { useNavigate } from 'react-router-dom';
 
 export default function LogInPage() {
+  const navigate  = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLogIn, setIsLogIn] = useState(true);
   const {setIsLoggedIn} = useAuth();
@@ -22,6 +24,7 @@ export default function LogInPage() {
       if (res.success) {
         if(isLogIn){
           localStorage.setItem("isLoggedIn", "true");
+          navigate('/');
           setIsLoggedIn(true);
         }
         else{
@@ -37,12 +40,6 @@ export default function LogInPage() {
   }
   return (
     <div className="min-h-screen bg-black flex items-center justify-center px-6">
-      {/* Animated Background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/10 to-cyan-900/20">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-cyan-400/20 to-blue-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-
       {/* Login Card */}
       <div className="relative z-10 w-full max-w-md">
         {/* Logo */}

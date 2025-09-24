@@ -1,4 +1,4 @@
-import './App.css'
+import './style.css'
 import HomePage from './components/Home/Home'
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
 import StudySetsPage from './components/StudySets/StudySets'
@@ -25,11 +25,9 @@ function AppRoutes() {
   return (
     <>
         <Routes> 
-          <Route path="/" element={isLoggedIn ? 
-            <HomePage 
-              showCreateModal={showCreateModal}
-              setShowCreateModal={setShowCreateModal}/> :
-            <LogInPage/>} /> 
+          <Route path="/" element={
+            <HomePage showCreateModal={showCreateModal} setShowCreateModal={setShowCreateModal}/>} />
+          <Route path="/login" element={<LogInPage/>} />
           <Route path="/sets" element={<StudySetsPage 
             showCreateModal={showCreateModal}
             setShowCreateModal={setShowCreateModal}/>} /> 

@@ -1,5 +1,5 @@
 import { Brain, ArrowLeft } from "lucide-react";
-function StudyHeader({documentInfo}){
+function StudyHeader({title}){
     return(
         <header className="relative z-50 border-b border-white/10 bg-black/40 backdrop-blur-xl">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -19,12 +19,7 @@ function StudyHeader({documentInfo}){
                             </div>
                         </div>
                         <div>
-                            <h1 className="text-xl font-bold text-white">{documentInfo.title}</h1>
-                            <div className="flex items-center space-x-2 text-sm text-gray-400">
-                                <span>{documentInfo.university}</span>
-                                <span>•</span>
-                                <span>{documentInfo.pages} pages</span>
-                            </div>
+                            <h1 className="text-xl font-bold text-white">{title}</h1>
                         </div>
                     </div>
                 </div>

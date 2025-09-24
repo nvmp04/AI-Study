@@ -98,7 +98,7 @@ export function Sets({filteredSets}){
 
             {/* Action Buttons */}
             <div className="flex items-center space-x-3">
-              <button onClick={()=>navigate(`/sets/study/${set.id}`)}
+              <button onClick={()=>navigate(`/sets/study/${set._id.toString()}`)}
                 className={`flex-1 bg-gradient-to-r ${set.color} hover:scale-105 text-white py-3 px-4 rounded-xl font-bold transition-all duration-300 shadow-lg flex items-center justify-center space-x-2`}>
                 <Play className="h-4 w-4" />
                 <span>Study</span>

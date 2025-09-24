@@ -9,7 +9,8 @@ import { SaFbar } from './SaFbar';
 export default function StudySetsPage({showCreateModal, setShowCreateModal}) {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterBy, setFilterBy] = useState('all');  
-  const {studySets} = useSets();
+  const { studySets, isLoading, error } = useSets();
+  
   const filteredSets = studySets.filter(set => {
     const matchesSearch = set.title.toLowerCase().includes(searchTerm.toLowerCase()) ||  set.description.toLowerCase().includes(searchTerm.toLowerCase());
     
@@ -22,7 +23,9 @@ export default function StudySetsPage({showCreateModal, setShowCreateModal}) {
     return matchesSearch;
   });
   return (
-    <div className="min-h-screen bg-black overflow-hidden">
+    <>
+    <div className='min-h-screen bg-black overflow-hidden
+    '>
       {/* Header */}
       <header className={`relative z-50 border-b border-white/10 bg-black/40 backdrop-blur-xl ${showCreateModal ? 'pointer-events-none' : ''}`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -64,7 +67,8 @@ export default function StudySetsPage({showCreateModal, setShowCreateModal}) {
         </div>
       </header>
       {/* Main Content */}
-      <main className={`relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-12 transition-all duration-300 ${showCreateModal ? 'blur-sm pointer-events-none opacity-50' : ''}`}>
+      {isLoading && <p>Loading...</p>}
+      <main className={`relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-12 transition-all duration-300 ${showCreateModal ? 'blur-sm pointer-events-none opacity-50' : ''} ${!isLoading  ? "" : "hidden"}`}>
         {/* Page Header */}
         <div className="mb-12">
           {/* Search and Filters */}
@@ -93,5 +97,6 @@ export default function StudySetsPage({showCreateModal, setShowCreateModal}) {
       {/* Create Study Set Modal */}
       <CreateModal show={showCreateModal} setShowCreateModal={setShowCreateModal}/>
     </div>
+    </>
   );
 }

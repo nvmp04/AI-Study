@@ -7,23 +7,28 @@ import StudyHeader from './Header/Header';
 import TabNav from './LeftColumn/TabNav';
 import PDFcontent from './LeftColumn/StudyContent/PDFcontent';
 import StudyTools from './RightColumn/StudyTools';
+import { useParams } from 'react-router-dom';
+import { useSets } from '../../../context/SetsContext';
 
 export default function AIStudyInterface() {
   const [activeTab, setActiveTab] = useState('ai-summary');
-  
-  const documentInfo = {
-    title: "Đánh Giá Hiệu Suất Hệ Thống Máy Tính",
-    subtitle: "Performance Evaluation of Computer Systems",
-    author: "Trần Văn Hoài",
-    university: "HCMC University of Technology",
-    semester: "2024-2025/Semester 1",
-    pages: 63,
-    lastModified: "2025/09/08 14:42"
-  };
+  const {id} = useParams();
+  const {studySets, isLoading} = useSets();
+  if (isLoading) return <p>Loading...</p>;
+  const set = studySets.find((item)=>{
+    return id === item._id.toString();
+  })
+  const {
+    title = '',
+    introduction = '',
+    coreKnowledge = '',
+    applications = '',
+    notes = ''
+  } = set ?? {};  
   return (
     <div className="min-h-screen bg-black">
       {/* Header */}
-      <StudyHeader documentInfo={documentInfo}/>
+      <StudyHeader title={title}/>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -39,16 +44,16 @@ export default function AIStudyInterface() {
               {activeTab === 'ai-summary' ? (
                 <div className="space-y-8">
                     {/* Document Overview */}
-                    <Introduction/>
+                    <Introduction introduction={introduction}/>
 
                     {/* Core Concepts */}
-                    <Core/>
+                    <Core coreKnowledge={coreKnowledge}/>
 
                     {/* Note*/}
-                    <Notes/>
+                    <Notes notes={notes}/>
 
                     {/*Application*/}
-                    <Applications/>
+                    <Applications applications={applications}/>
                 </div>
               ) : (
                 /* Original PDF Content */

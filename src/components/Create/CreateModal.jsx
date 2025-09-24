@@ -37,6 +37,7 @@ function CreateModal({setShowCreateModal, show}){
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const {setAIsummaryContent} = useAIcontent();
+  let id;
   const handleCreateSet = async () => {
     try{
       setIsLoading(true);
@@ -49,14 +50,15 @@ function CreateModal({setShowCreateModal, show}){
       } else {
         result = await Create(image, newSet.title);
       }
-      (result) ? setAIsummaryContent(result) : alert('Error');
+      (result) ? setAIsummaryContent(result.reply) : alert('Error');
+      id = result.id
     }
     catch(err){
       setError(err.message);
     }
     finally{
       setIsLoading(false);
-      navigate("/sets/study/1");
+      navigate(`/sets/study/${id}`);
     }
   };
 

@@ -1,13 +1,18 @@
-export async function fetchAPI(url, method = "GET", content = null) {
+export async function fetchAPI(url, method = "GET", content = null, auth = null) {
   try {
-    const options = { method };
+    const options = { method, headers: {} };
     if (content) {
       if (content instanceof FormData) {
         options.body = content;
       } else {
-        options.headers = { 
-          "Content-Type": "application/json"};
+        options.headers["Content-Type"] = "application/json";
         options.body = JSON.stringify(content); 
+      }
+    }
+    if(auth){
+      const token = localStorage.getItem("token");
+      if(token){
+        options.headers["Authorization"] = `Bearer ${token}`
       }
     }
     const res = await fetch(url, options);
